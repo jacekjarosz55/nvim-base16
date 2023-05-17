@@ -55,7 +55,7 @@ end
 --
 -- local colorscheme = require('colorscheme')
 -- local hi = colorscheme.highlight
--- hi.Comment = { guifg='#ffffff', guibg='#000000', gui='italic', guisp=nil }
+-- hi.Comment = { guifg='#ffffff', guibg='#000000', gui=italic_style, guisp=nil }
 -- hi.LspDiagnosticsDefaultError = 'DiagnosticError' -- Link to another group
 --
 -- This is equivalent to the following vimscript
@@ -114,6 +114,18 @@ end
 function M.setup(colors, config)
     M.with_config(config)
 
+    local bold_style = "bold"
+    local italic_style = "italic"
+
+    if vim.g.base16_disable_bold then
+        bold_style = "none"
+    end
+
+    if vim.g.base16_disable_italic then
+        italic_style = "none"
+    end
+
+
     if type(colors) == 'string' then
         colors = M.colorschemes[colors]
     end
@@ -129,7 +141,7 @@ function M.setup(colors, config)
 
     -- Vim editor colors
     hi.Normal                             = { guifg = M.colors.base05, guibg = M.colors.base00, gui = nil, guisp = nil }
-    hi.Bold                               = { guifg = nil, guibg = nil, gui = 'bold', guisp = nil }
+    hi.Bold                               = { guifg = nil, guibg = nil, gui = bold_style, guisp = nil }
     hi.Debug                              = { guifg = M.colors.base08, guibg = nil, gui = nil, guisp = nil }
     hi.Directory                          = { guifg = M.colors.base0D, guibg = nil, gui = nil, guisp = nil }
     hi.Error                              = { guifg = M.colors.base08, guibg = M.colors.base00, gui = nil, guisp = nil }
@@ -226,11 +238,11 @@ function M.setup(colors, config)
     hi.gitcommitSelectedType              = { guifg = M.colors.base0D, guibg = nil, gui = nil, guisp = nil }
     hi.gitcommitUnmergedType              = { guifg = M.colors.base0D, guibg = nil, gui = nil, guisp = nil }
     hi.gitcommitDiscardedType             = { guifg = M.colors.base0D, guibg = nil, gui = nil, guisp = nil }
-    hi.gitcommitBranch                    = { guifg = M.colors.base09, guibg = nil, gui = 'bold', guisp = nil }
+    hi.gitcommitBranch                    = { guifg = M.colors.base09, guibg = nil, gui = bold_style, guisp = nil }
     hi.gitcommitUntrackedFile             = { guifg = M.colors.base0A, guibg = nil, gui = nil, guisp = nil }
-    hi.gitcommitUnmergedFile              = { guifg = M.colors.base08, guibg = nil, gui = 'bold', guisp = nil }
-    hi.gitcommitDiscardedFile             = { guifg = M.colors.base08, guibg = nil, gui = 'bold', guisp = nil }
-    hi.gitcommitSelectedFile              = { guifg = M.colors.base0B, guibg = nil, gui = 'bold', guisp = nil }
+    hi.gitcommitUnmergedFile              = { guifg = M.colors.base08, guibg = nil, gui = bold_style, guisp = nil }
+    hi.gitcommitDiscardedFile             = { guifg = M.colors.base08, guibg = nil, gui = bold_style, guisp = nil }
+    hi.gitcommitSelectedFile              = { guifg = M.colors.base0B, guibg = nil, gui = bold_style, guisp = nil }
 
     -- GitGutter highlighting
     hi.GitGutterAdd                       = { guifg = M.colors.base0B, guibg = M.colors.base00, gui = nil, guisp = nil }
@@ -270,18 +282,18 @@ function M.setup(colors, config)
     hi.TSAttribute                        = { guifg = M.colors.base0A, guibg = nil, gui = 'none', guisp = nil }
     hi.TSBoolean                          = { guifg = M.colors.base09, guibg = nil, gui = 'none', guisp = nil }
     hi.TSCharacter                        = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
-    hi.TSComment                          = { guifg = M.colors.base03, guibg = nil, gui = 'italic', guisp = nil }
+    hi.TSComment                          = { guifg = M.colors.base03, guibg = nil, gui = italic_style, guisp = nil }
     hi.TSConstructor                      = { guifg = M.colors.base0D, guibg = nil, gui = 'none', guisp = nil }
     hi.TSConditional                      = { guifg = M.colors.base0E, guibg = nil, gui = 'none', guisp = nil }
     hi.TSConstant                         = { guifg = M.colors.base09, guibg = nil, gui = 'none', guisp = nil }
-    hi.TSConstBuiltin                     = { guifg = M.colors.base09, guibg = nil, gui = 'italic', guisp = nil }
+    hi.TSConstBuiltin                     = { guifg = M.colors.base09, guibg = nil, gui = italic_style, guisp = nil }
     hi.TSConstMacro                       = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
     hi.TSError                            = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
     hi.TSException                        = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
     hi.TSField                            = { guifg = M.colors.base05, guibg = nil, gui = 'none', guisp = nil }
     hi.TSFloat                            = { guifg = M.colors.base09, guibg = nil, gui = 'none', guisp = nil }
     hi.TSFunction                         = { guifg = M.colors.base0D, guibg = nil, gui = 'none', guisp = nil }
-    hi.TSFuncBuiltin                      = { guifg = M.colors.base0D, guibg = nil, gui = 'italic', guisp = nil }
+    hi.TSFuncBuiltin                      = { guifg = M.colors.base0D, guibg = nil, gui = italic_style, guisp = nil }
     hi.TSFuncMacro                        = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
     hi.TSInclude                          = { guifg = M.colors.base0D, guibg = nil, gui = 'none', guisp = nil }
     hi.TSKeyword                          = { guifg = M.colors.base0E, guibg = nil, gui = 'none', guisp = nil }
@@ -307,23 +319,23 @@ function M.setup(colors, config)
     hi.TSTag                              = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
     hi.TSTagDelimiter                     = { guifg = M.colors.base0F, guibg = nil, gui = 'none', guisp = nil }
     hi.TSText                             = { guifg = M.colors.base05, guibg = nil, gui = 'none', guisp = nil }
-    hi.TSStrong                           = { guifg = nil, guibg = nil, gui = 'bold', guisp = nil }
-    hi.TSEmphasis                         = { guifg = M.colors.base09, guibg = nil, gui = 'italic', guisp = nil }
+    hi.TSStrong                           = { guifg = nil, guibg = nil, gui = bold_style, guisp = nil }
+    hi.TSEmphasis                         = { guifg = M.colors.base09, guibg = nil, gui = italic_style, guisp = nil }
     hi.TSUnderline                        = { guifg = M.colors.base00, guibg = nil, gui = 'underline', guisp = nil }
     hi.TSStrike                           = { guifg = M.colors.base00, guibg = nil, gui = 'strikethrough', guisp = nil }
     hi.TSTitle                            = { guifg = M.colors.base0D, guibg = nil, gui = 'none', guisp = nil }
     hi.TSLiteral                          = { guifg = M.colors.base09, guibg = nil, gui = 'none', guisp = nil }
     hi.TSURI                              = { guifg = M.colors.base09, guibg = nil, gui = 'underline', guisp = nil }
     hi.TSType                             = { guifg = M.colors.base0A, guibg = nil, gui = 'none', guisp = nil }
-    hi.TSTypeBuiltin                      = { guifg = M.colors.base0A, guibg = nil, gui = 'italic', guisp = nil }
+    hi.TSTypeBuiltin                      = { guifg = M.colors.base0A, guibg = nil, gui = italic_style, guisp = nil }
     hi.TSVariable                         = { guifg = M.colors.base08, guibg = nil, gui = 'none', guisp = nil }
-    hi.TSVariableBuiltin                  = { guifg = M.colors.base08, guibg = nil, gui = 'italic', guisp = nil }
+    hi.TSVariableBuiltin                  = { guifg = M.colors.base08, guibg = nil, gui = italic_style, guisp = nil }
 
     hi.TSDefinition                       = { guifg = nil, guibg = nil, gui = 'underline', guisp = M.colors.base04 }
     hi.TSDefinitionUsage                  = { guifg = nil, guibg = nil, gui = 'underline', guisp = M.colors.base04 }
-    hi.TSCurrentScope                     = { guifg = nil, guibg = nil, gui = 'bold', guisp = nil }
+    hi.TSCurrentScope                     = { guifg = nil, guibg = nil, gui = bold_style, guisp = nil }
 
-    hi.LspInlayHint                       = { guifg = M.colors.base03, guibg = nil, gui = 'italic', guisp = nil }
+    hi.LspInlayHint                       = { guifg = M.colors.base03, guibg = nil, gui = italic_style, guisp = nil }
 
     if vim.fn.has('nvim-0.8.0') then
         hi['@comment'] = 'TSComment'
@@ -428,7 +440,7 @@ function M.setup(colors, config)
     hi.User8             = { guifg = M.colors.base00, guibg = M.colors.base02, gui = 'none', guisp = nil }
     hi.User9             = { guifg = M.colors.base00, guibg = M.colors.base02, gui = 'none', guisp = nil }
 
-    hi.TreesitterContext = { guifg = nil, guibg = M.colors.base01, gui = 'italic', guisp = nil }
+    hi.TreesitterContext = { guifg = nil, guibg = M.colors.base01, gui = italic_style, guisp = nil }
 
     if M.config.telescope then
         if not M.config.telescope_borders and hex_re:match_str(M.colors.base00) and hex_re:match_str(M.colors.base01) and
